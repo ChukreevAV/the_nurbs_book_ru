@@ -1,1 +1,1 @@
-https://triroakenshield.github.io/the_nurbs_book_ru/
+https://ChukreevAV.github.io/the_nurbs_book_ru/
