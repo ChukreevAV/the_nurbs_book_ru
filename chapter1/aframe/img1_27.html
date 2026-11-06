@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>img1_27</title>
+    <link rel="stylesheet" href="../../css/a_img.css" />
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"> </script>
     <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
     <script src="../../js/lib/aframe/aframe-environment-component.min.js"></script>
@@ -18,6 +19,10 @@
 
 <body>
     <a-scene id="model" background="color: #FFFFFF">
+        <a-assets>
+            <a-mixin id="plane_material" material="shader: html; ratio: height; transparent: true; side: double; fps: 25"></a-mixin>
+        </a-assets>
+
         <a-light type="point" position="5 5 5"></a-light>
         <a-entity id="cameraRig" position="0 0 0.5" movement-controls="fly: true">
             <a-camera id="camera" look-controls> </a-camera>
@@ -31,104 +36,104 @@
             <a-text side="double" position="2 0 0" rotation="-5 60 0" value="Y" color="black"></a-text>
 
             <a-entity surfnet="controlPoints: 
-            0.8, 1.8, 2, 1, 
-            1.8, 1.8, 2, 1, 
-            1.8, 0.8, 2, 1,
-            0.8, 1.8, 0, 1, 
-            1.8, 1.8, 0, 1, 
-            1.8, 0.8, 0, 1;
-            U: 0, 0, 0, 1, 1, 1;  
-            V: 0, 0, 1, 1; 
-            p: 2; q: 1; nx: 2; ny: 3;">
+                0.8, 1.8, 2, 1, 
+                1.8, 1.8, 2, 1, 
+                1.8, 0.8, 2, 1,
+                0.8, 1.8, 0, 1, 
+                1.8, 1.8, 0, 1, 
+                1.8, 0.8, 0, 1;
+                U: 0, 0, 0, 1, 1, 1;  
+                V: 0, 0, 1, 1; 
+                p: 2; q: 1; nx: 2; ny: 3;">
             </a-entity>
 
             <a-entity surflines="controlPoints: 
-            0.8, 1.8, 2, 2, 
-            1.8, 1.8, 2, 1, 
-            1.8, 0.8, 2, 1,
-            0.8, 1.8, 0, 2, 
-            1.8, 1.8, 0, 1, 
-            1.8, 0.8, 0, 1;
-            V: 0, 0, 0, 1, 1, 1;  
-            U: 0, 0, 1, 1; 
-            p: 1; q: 2; nx: 2; ny: 3;
-            lu: 0, 0.5, 1;
-            lv: 0, 0.5, 1;
-            lum: 0, 0, 0;
-            lvm: 0, 0, 0;">
+                0.8, 1.8, 2, 2, 
+                1.8, 1.8, 2, 1, 
+                1.8, 0.8, 2, 1,
+                0.8, 1.8, 0, 2, 
+                1.8, 1.8, 0, 1, 
+                1.8, 0.8, 0, 1;
+                V: 0, 0, 0, 1, 1, 1;  
+                U: 0, 0, 1, 1; 
+                p: 1; q: 2; nx: 2; ny: 3;
+                lu: 0, 0.5, 1;
+                lv: 0, 0.5, 1;
+                lum: 0, 0, 0;
+                lvm: 0, 0, 0;">
             </a-entity>
 
-            <a-plane material="shader: html; target: #P20; ratio: height; transparent: true; side: double"
+            <a-plane mixin="plane_material" material="target: #P20"
             position="0.8, 1.8, 2" rotation="-15 30 0" scale="0.3 0.3 1"></a-plane>
 
-            <a-plane material="shader: html; target: #P10; ratio: height; transparent: true; side: double"
+            <a-plane mixin="plane_material" material="target: #P10"
             position="1.8, 1.8, 2" rotation="-15 30 0" scale="0.3 0.3 1"></a-plane>
 
-            <a-plane material="shader: html; target: #P00; ratio: height; transparent: true; side: double"
+            <a-plane mixin="plane_material" material="target: #P00"
             position="1.8, 0.8, 2" rotation="-15 30 0" scale="0.3 0.3 1"></a-plane>
 
-            <a-plane material="shader: html; target: #P21; ratio: height; transparent: true; side: double"
+            <a-plane mixin="plane_material" material="target: #P21"
             position="0.8, 1.8, 0" rotation="-15 30 0" scale="0.3 0.3 1"></a-plane>
 
-            <a-plane material="shader: html; target: #P11; ratio: height; transparent: true; side: double"
+            <a-plane mixin="plane_material" material="target: #P11"
             position="1.8, 1.8, 0" rotation="-15 30 0" scale="0.3 0.3 1"></a-plane>
 
-            <a-plane material="shader: html; target: #P01; ratio: height; transparent: true; side: double"
+            <a-plane mixin="plane_material" material="target: #P01"
             position="1.8, 0.8, 0" rotation="-15 30 0" scale="0.3 0.3 1"></a-plane>
 
-            <a-plane material="shader: html; target: #Cu; ratio: height; transparent: true; side: double"
+            <a-plane mixin="plane_material" material="target: #Cu"
             position="1.2, 1.8, 0.6" rotation="-15 30 0" scale="0.3 0.3 1"></a-plane>
 
-            <a-plane material="shader: html; target: #Cv; ratio: height; transparent: true; side: double"
+            <a-plane mixin="plane_material" material="target: #Cv"
             position="1.6, 1.4, 0.5" rotation="-15 30 0" scale="0.3 0.3 1"></a-plane>
 
         </a-entity>
     </a-scene>
 
-    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
-        <div id="P00" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+    <div class="parent">
+        <div id="P00" class="text_baner">
             <p style="border: 1px #FFF">$$P_{0,0}$$</p>
         </div>
     </div>
 
-    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
-        <div id="P10" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+    <div class="parent">
+        <div id="P10" class="text_baner">
             <p style="border: 1px #FFF">$$P_{1,0}$$</p>
         </div>
     </div>
 
-    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
-        <div id="P01" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+    <div class="parent">
+        <div id="P01" class="text_baner">
             <p style="border: 1px #FFF">$$P_{0,1}$$</p>
         </div>
     </div>
 
-    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
-        <div id="P11" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+    <div class="parent">
+        <div id="P11" class="text_baner">
             <p style="border: 1px #FFF">$$P_{1,1}$$</p>
         </div>
     </div>
 
-    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
-        <div id="P20" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+    <div class="parent">
+        <div id="P20" class="text_baner">
             <p style="border: 1px #FFF">$$P_{2,0}$$</p>
         </div>
     </div>
 
-    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
-        <div id="P21" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+    <div class="parent">
+        <div id="P21" class="text_baner">
             <p style="border: 1px #FFF">$$P_{2,1}$$</p>
         </div>
     </div>
 
-    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
-        <div id="Cu" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+    <div class="parent">
+        <div id="Cu" class="text_baner">
             <p style="border: 1px #FFF">$$C_{u=1/2}(v)$$</p>
         </div>
     </div>
 
-    <div style="position: fixed; left: 0; top: 0; z-index: -1;">
-        <div id="Cv" style="font-size: 256px; padding-top: 12px; text-align: center; font-weight: 6;">
+    <div class="parent">
+        <div id="Cv" class="text_baner">
             <p style="border: 1px #FFF">$$C_{v=1/2}(u)$$</p>
         </div>
     </div>

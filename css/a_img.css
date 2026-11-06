@@ -1,0 +1,13 @@
+div.parent {
+    position: fixed;
+    left: 0;    
+    top: 0;
+    z-index: -1;
+}
+
+div.text_baner {
+    font-size: 256px;
+    padding-top: 12px;
+    text-align: center;
+    font-weight: 6;
+}

@@ -4,7 +4,6 @@
           var geometry;
           var material;
   
-          //console.log('Hello, World1!');
           this.rendererSystem = this.el.sceneEl.systems.renderer;
           material = this.material = new THREE.LineBasicMaterial({
             color: "#000000",
@@ -41,7 +40,6 @@
           group.add(nmesh);
   
           this.el.setObject3D(this.attrName, group);
-          //console.log('Hello, World2!');
         }
   
       });
