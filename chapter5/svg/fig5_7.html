@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig5_7</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.138.3/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0, 1/4, 1/2, 3/4, 1, 1, 1, 1];
+        var P = [
+            new THREE.Vector2(40, 120),  //P0
+            new THREE.Vector2(100, 120),  //P1
+            new THREE.Vector2(130, 60),  //P2
+            new THREE.Vector2(180, 30), //P3
+            new THREE.Vector2(230, 60),  //P4
+            new THREE.Vector2(260, 120),  //P5
+            new THREE.Vector2(320, 120)  //P6
+        ];
+
+        var draw = SVG(document.getElementById('drawing')).size(400, 340);
+        var stroke1 = { width: 1 }, stroke3 = { color: "black" };
+
+        var sstring = "M", C;
+
+        for (var i = 0; i < 7; i++) {
+            draw.circle(6).move(P[i].x - 3, P[i].y - 3).fill('none').stroke(stroke1);
+            sstring = sstring.concat(P[i].x, " ", P[i].y, " ");
+        }
+
+        draw.path(sstring).fill("none").stroke(stroke3);
+        draw.path(NURBSUtils.DrawPath(3, U, P, 0, 1)).fill("none").stroke(stroke3);
+        draw.foreignObject(80, 40).move(175, -10).appendChild("p", { innerText: "`C`" });
+
+        var U1 = [0, 0, 0, 0, 1/4, 1/2, 1/2, 1/2, 1/2];
+        var P1 = [
+            new THREE.Vector2(40, 220),  //P0
+            new THREE.Vector2(100, 220),  //P1
+            new THREE.Vector2(130, 160),  //P2
+            new THREE.Vector2(160, 141.2),
+            new THREE.Vector2(170, 141.2)
+        ];   
+        
+        var U2 = [1/2, 1/2, 1/2, 1/2, 3/4, 1, 1, 1, 1];
+        var P2 = [
+            new THREE.Vector2(182, 141.2), //P3
+            new THREE.Vector2(192, 141.2),            
+            new THREE.Vector2(230, 160),  //P4
+            new THREE.Vector2(260, 220),  //P5
+            new THREE.Vector2(320, 220)  //P6
+        ];    
+
+        var sstring1 = "M", C;
+        var sstring2 = "M", C;
+
+        for (var i = 0; i < 5; i++) {
+            draw.circle(6).move(P1[i].x - 3, P1[i].y - 3).fill('none').stroke(stroke1);
+            sstring1 = sstring1.concat(P1[i].x, " ", P1[i].y, " ");
+            draw.circle(6).move(P2[i].x - 3, P2[i].y - 3).fill('none').stroke(stroke1);
+            sstring2 = sstring2.concat(P2[i].x, " ", P2[i].y, " ");
+        }
+
+        draw.path(sstring1).fill("none").stroke(stroke3);
+        draw.path(sstring2).fill("none").stroke(stroke3);
+        draw.path(NURBSUtils.DrawPath(3, U1, P1, 0, 1/2)).fill("none").stroke(stroke3);
+        draw.path(NURBSUtils.DrawPath(3, U2, P2, 1/2, 1)).fill("none").stroke(stroke3);
+        draw.foreignObject(80, 40).move(95, 150).appendChild("p", { innerText: "`C_1`" });
+        draw.foreignObject(80, 40).move(250, 150).appendChild("p", { innerText: "`C_2`" });
+
+        var U11 = [0, 0, 0, 0, 1/8, 1/8, 1/8, 1/8];
+        var P11 = [
+            new THREE.Vector2(40, 320),  //P0
+            new THREE.Vector2(70, 320),  //P1
+            new THREE.Vector2(95, 310),  //P2
+            new THREE.Vector2(110, 296.3)
+        ];  
+
+        var U12 = [1/8, 1/8, 1/8, 1/8, 1/4, 1/2, 1/2, 1/2, 1/2];
+        var P12 = [
+            new THREE.Vector2(120.6, 283),  //P0
+            new THREE.Vector2(125, 270),  //P1
+            new THREE.Vector2(130, 260),  //P2
+            new THREE.Vector2(160, 241.2),
+            new THREE.Vector2(170, 241.2)
+        ];
+
+        var U21 = [1/2, 1/2, 1/2, 1/2, 3/4, 7/8, 7/8, 7/8, 7/8];
+        var P21 = [
+            new THREE.Vector2(182, 241.2), //P3
+            new THREE.Vector2(192, 241.2),            
+            new THREE.Vector2(230, 260),  //P4
+            new THREE.Vector2(235, 270),  //P5
+            new THREE.Vector2(240.5, 285.7)  //P6
+        ];    
+
+        var U22 = [7/8, 7/8, 7/8, 7/8, 1, 1, 1, 1];
+        var P22 = [
+            new THREE.Vector2(250.5, 296.3), //P3        
+            new THREE.Vector2(265, 310),  //P4
+            new THREE.Vector2(290, 320),  //P5
+            new THREE.Vector2(320, 320)  //P6
+        ];    
+
+        var sstring11 = "M", C;        
+        var sstring12 = "M", C;
+        var sstring21 = "M", C;
+        var sstring22 = "M", C;
+
+        for (var i = 0; i < 4; i++) {
+            draw.circle(6).move(P11[i].x - 3, P11[i].y - 3).fill('none').stroke(stroke1);
+            sstring11 = sstring11.concat(P11[i].x, " ", P11[i].y, " ");
+            draw.circle(6).move(P22[i].x - 3, P22[i].y - 3).fill('none').stroke(stroke1);
+            sstring22 = sstring22.concat(P22[i].x, " ", P22[i].y, " ");
+        }
+        
+        for (var i = 0; i < 5; i++) {
+            draw.circle(6).move(P21[i].x - 3, P21[i].y - 3).fill('none').stroke(stroke1);
+            sstring21 = sstring21.concat(P21[i].x, " ", P21[i].y, " ");
+            draw.circle(6).move(P12[i].x - 3, P12[i].y - 3).fill('none').stroke(stroke1);
+            sstring12 = sstring12.concat(P12[i].x, " ", P12[i].y, " ");
+        }
+
+        draw.path(sstring11).fill("none").stroke(stroke3);
+        draw.path(sstring12).fill("none").stroke(stroke3);
+        draw.path(sstring21).fill("none").stroke(stroke3);
+        draw.path(sstring22).fill("none").stroke(stroke3);
+        draw.path(NURBSUtils.DrawPath(3, U11, P11, 0, 1/8)).fill("none").stroke(stroke3);
+        draw.path(NURBSUtils.DrawPath(3, U12, P12, 1/8, 1/2)).fill("none").stroke(stroke3);
+        draw.path(NURBSUtils.DrawPath(3, U21, P21, 1/2, 7/8)).fill("none").stroke(stroke3);        
+        draw.path(NURBSUtils.DrawPath(3, U22, P22, 7/8, 1)).fill("none").stroke(stroke3);
+        draw.foreignObject(80, 40).move(50, 275).appendChild("p", { innerText: "`C_{1,1}`" });
+        draw.foreignObject(80, 40).move(100, 210).appendChild("p", { innerText: "`C_{1,2}`" });
+        draw.foreignObject(80, 40).move(220, 210).appendChild("p", { innerText: "`C_{2,1}`" });
+        draw.foreignObject(80, 40).move(290, 275).appendChild("p", { innerText: "`C_{2,2}`" });
+    </script>
+
+</body>
+
+</html>

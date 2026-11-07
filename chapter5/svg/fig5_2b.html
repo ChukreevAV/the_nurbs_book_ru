@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig5_1b</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+    <script src="../../js/plane_Bu.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U  = [0, 0, 0, 0, 1, 2, 3, 4, 5, 5, 5, 5];
+        var U1 = [0, 0, 0, 0, 1, 2, 2, 3, 4, 5, 5, 5, 5];
+        var test = make_Ulegend(U, ["0", "1", "2", "3", "4", "5"]);
+        planeOptions.svgWidth = 580;
+        planeOptions.svgHeight = 260;
+        planeOptions.zero_y = 200;
+        planeOptions.hscale = 100;
+        planeOptions.vscale = 100;
+        var draw = draw_axis(document.getElementById('drawing'), planeOptions, test);
+        var stroke1 = { width: 1 }, stroke2 = { width: 1, dasharray: "5,5" }, stroke3 = { color: "black" };
+        
+        for (var i = 0; i < 5; i++) {
+            for (var k = 0; k < 5; k++) {
+                draw.path(NURBSUtils.DrawPathS(3 + i, 3, U, k, i, 1 + i)).fill("none").stroke(stroke3);
+            }
+        }
+
+        for (var i = 0; i < 2; i++) {
+            for (var k = 0; k < 5; k++) {
+                draw.path(NURBSUtils.DrawPathS(3 + i, 3, U1, k, i, 1 + i)).fill("none").stroke(stroke2);
+            }
+        }
+
+         for (var k = 0; k < 5; k++) {
+            draw.path(NURBSUtils.DrawPathS(6, 3, U1, k, 2, 3)).fill("none").stroke(stroke2);
+            //draw.path(NURBSUtils.DrawPathS(6, 3, U1, k, 3, 4)).fill("none").stroke(stroke2);
+            draw.path(NURBSUtils.DrawPathS(7, 3, U1, k, 3, 4)).fill("none").stroke(stroke2);
+            //draw.path(NURBSUtils.DrawPathS(8, 3, U1, k, 4, 5)).fill("none").stroke(stroke2);
+        }
+
+        draw.foreignObject(80, 40).move(25, 60).appendChild("p", { innerText: "`N_0=bar N_0`" });
+        draw.foreignObject(80, 40).move(30, 95).appendChild("p", { innerText: "`N_1=bar N_1`" });
+        draw.foreignObject(80, 40).move(170, 85).appendChild("p", { innerText: "`bar N_3`" });
+        draw.foreignObject(80, 40).move(230, 85).appendChild("p", { innerText: "`bar N_4`" });
+        draw.foreignObject(80, 40).move(355, 95).appendChild("p", { innerText: "`N_5=bar N_6`" });
+        draw.foreignObject(80, 40).move(465, 60).appendChild("p", { innerText: "`N_7=bar N_8`" });
+
+        draw.foreignObject(80, 40).move(190, 210).appendChild("p", { innerText: "`bar u=2`" });
+        draw.path("M210 220 210 215 207 215 210 200 213 215 210 215").fill("none").stroke(stroke3);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig5_4</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.138.3/three.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>  
+        var U= [0, 0, 0, 0, 1, 1.5, 2.3, 3.9, 4.3, 5, 6.5, 7, 7, 7, 7];
+        var P = [
+            new THREE.Vector2(100, 250),//P0
+            new THREE.Vector2(50, 180), //P1
+            new THREE.Vector2(100, 80), //P2
+            new THREE.Vector2(200, 50), //P3
+            new THREE.Vector2(280, 150),//P4
+            new THREE.Vector2(250, 210),//P5
+            new THREE.Vector2(290, 260),//P6
+            new THREE.Vector2(380, 260),//P7
+            new THREE.Vector2(440, 200),//P8
+            new THREE.Vector2(420, 120),//P9
+            new THREE.Vector2(320, 70)  //P10
+        ];
+
+        var pointsCount = P.length;
+        var curveDegree = 3;
+
+        var draw = SVG(document.getElementById('drawing')).size(500, 340);
+        var stroke1 = { width: 1 }, stroke2 = { color: "black", dasharray: "5,5" }, stroke3 = { color: "black" }, stroke4 = { color: "red" }, stroke5 = { width: 0.5 };           
+
+        var sstring = "M", C;
+
+        for (var i = 0; i < 11; i++) {
+            draw.circle(6).move(P[i].x - 3, P[i].y - 3).fill('none').stroke(stroke5);
+            sstring = sstring.concat(P[i].x, " ", P[i].y, " ");
+        }
+
+        for (var i = 1; i < pointsCount; i++) {
+
+            var p1 = P[i - 1].clone();
+            var p2 = P[i].clone();
+            p2.add(p1.negate());
+            var dist1 = 0;
+
+            for (var j = 0; j < curveDegree; j++) {
+
+                lm = (U[i+j+1] - U[i+j])/(U[i+curveDegree] - U[i]);
+                if (lm > 0) {
+                    dist1 += lm;
+                    var p3 = p2.clone();
+                    p3.multiplyScalar(dist1);
+                    var pp1 = P[i - 1].clone().add(p3);
+                    draw.circle(4).move(pp1.x - 2, pp1.y - 2).fill('none').stroke(stroke5);
+                }
+            }
+        }
+
+        draw.path(sstring).fill("none").stroke(stroke3);
+        
+        draw.foreignObject(80, 40).move(110, 225).appendChild("p", { innerText: "`P_0`" });
+        draw.foreignObject(80, 40).move(20, 155).appendChild("p", { innerText: "`P_1`" });
+        draw.foreignObject(80, 40).move(90, 40).appendChild("p", { innerText: "`P_2`" });
+        draw.foreignObject(80, 40).move(190, 10).appendChild("p", { innerText: "`P_3`" });
+        draw.foreignObject(80, 40).move(290, 130).appendChild("p", { innerText: "`P_4`" });
+        draw.foreignObject(80, 40).move(220, 190).appendChild("p", { innerText: "`P_5`" });
+        draw.foreignObject(80, 40).move(280, 250).appendChild("p", { innerText: "`P_6`" });
+        draw.foreignObject(80, 40).move(370, 250).appendChild("p", { innerText: "`P_7`" });
+        draw.foreignObject(80, 40).move(450, 180).appendChild("p", { innerText: "`P_8`" });
+        draw.foreignObject(80, 40).move(430, 90).appendChild("p", { innerText: "`P_9`" });
+        draw.foreignObject(80, 40).move(310, 30).appendChild("p", { innerText: "`P_10`" });
+        
+        draw.line(50, 290, 455, 290).stroke(stroke1);
+        draw.line(50, 285, 50, 295).stroke(stroke1);
+        draw.line(55, 285, 55, 295).stroke(stroke1);
+        draw.line(60, 285, 60, 295).stroke(stroke1);
+        draw.line(65, 285, 65, 295).stroke(stroke1);        
+        draw.foreignObject(80, 40).move(53, 280).appendChild("p", { innerText: "`0`" });
+        draw.line(125, 285, 125, 295).stroke(stroke1);
+        draw.foreignObject(80, 40).move(120, 280).appendChild("p", { innerText: "`1`" });
+        draw.line(165, 285, 165, 295).stroke(stroke1);
+        draw.foreignObject(80, 40).move(155, 280).appendChild("p", { innerText: "`1.5`" });
+        draw.line(213, 285, 213, 295).stroke(stroke1);
+        draw.foreignObject(80, 40).move(205, 280).appendChild("p", { innerText: "`2.3`" });
+        draw.line(309, 285, 309, 295).stroke(stroke1);
+        draw.foreignObject(80, 40).move(299, 280).appendChild("p", { innerText: "`3.9`" });
+        draw.line(333, 285, 333, 295).stroke(stroke1);
+        draw.foreignObject(80, 40).move(323, 280).appendChild("p", { innerText: "`4.3`" });
+        draw.line(365, 285, 365, 295).stroke(stroke1);
+        draw.foreignObject(80, 40).move(360, 280).appendChild("p", { innerText: "`5`" });     
+        draw.line(415, 285, 415, 295).stroke(stroke1);
+        draw.foreignObject(80, 40).move(405, 280).appendChild("p", { innerText: "`6.5`" });           
+        draw.line(440, 285, 440, 295).stroke(stroke1);
+        draw.line(445, 285, 445, 295).stroke(stroke1);  
+        draw.line(450, 285, 450, 295).stroke(stroke1);  
+        draw.line(455, 285, 455, 295).stroke(stroke1);  
+        draw.foreignObject(80, 40).move(443, 280).appendChild("p", { innerText: "`7`" });
+    </script>
+
+</body>
+
+</html>

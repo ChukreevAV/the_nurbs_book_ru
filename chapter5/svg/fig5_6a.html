@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig5_6a</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+    <script src="../../js/plane_Bu.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U  = [0, 0, 0, 0, 2, 3, 3, 3, 3];
+        var test = make_Ulegend(U, ["0", "2", "3"]);
+        planeOptions.svgWidth = 380;
+        planeOptions.svgHeight = 260;
+        planeOptions.zero_y = 200;
+        planeOptions.hscale = 100;
+        planeOptions.vscale = 100;
+        var draw = draw_axis(document.getElementById('drawing'), planeOptions, test);
+        var stroke1 = { width: 1 }, stroke2 = { width: 1, dasharray: "5,5" }, stroke3 = { color: "black" };
+        
+        for (var k = 0; k < 5; k++) {
+            draw.path(NURBSUtils.DrawPathS(3, 3, U, k, 0, 2)).fill("none").stroke(stroke3);
+            draw.path(NURBSUtils.DrawPathS(4, 3, U, k, 2, 3)).fill("none").stroke(stroke3);
+        }
+
+        draw.foreignObject(80, 40).move(25, 75).appendChild("p", { innerText: "`N_0`" });
+        draw.foreignObject(80, 40).move(80, 110).appendChild("p", { innerText: "`N_1`" });
+        draw.foreignObject(80, 40).move(170, 110).appendChild("p", { innerText: "`N_2`" });
+        draw.foreignObject(80, 40).move(250, 90).appendChild("p", { innerText: "`N_3`" });
+        draw.foreignObject(80, 40).move(300, 55).appendChild("p", { innerText: "`N_4`" });
+
+    </script>
+
+</body>
+
+</html>

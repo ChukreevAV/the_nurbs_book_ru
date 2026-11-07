@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig5_2a</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.138.3/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0, 1, 2, 3, 4, 5, 5, 5, 5];
+        var P = [new THREE.Vector2(20, 150), new THREE.Vector2(90, 120), new THREE.Vector2(150, 190), new THREE.Vector2(290, 190),
+        new THREE.Vector2(340, 100), new THREE.Vector2(290, 30), new THREE.Vector2(150, 30), new THREE.Vector2(110, 90)];
+
+        var draw = SVG(document.getElementById('drawing')).size(400, 300);
+        var stroke1 = { width: 1 }, stroke2 = { color: "black", dasharray: "5,5" }, stroke3 = { color: "black" };
+
+        draw.foreignObject(80, 40).move(5, 140).appendChild("p", { innerText: "`P_0=Q_0`" });
+        draw.foreignObject(80, 40).move(20, 90).appendChild("p", { innerText: "`P_1=Q_1`" });
+        draw.foreignObject(80, 40).move(80, 165).appendChild("p", { innerText: "`P_2=Q_2`" });
+
+        draw.foreignObject(80, 40).move(240, 175).appendChild("p", { innerText: "`Q_3`" });
+        draw.foreignObject(80, 40).move(295, 165).appendChild("p", { innerText: "`P_3`" });
+        draw.foreignObject(80, 40).move(320, 130).appendChild("p", { innerText: "`Q_4`" });
+        draw.foreignObject(80, 40).move(345, 75).appendChild("p", { innerText: "`P_4=Q_5`" });
+
+        draw.foreignObject(80, 40).move(295, 5).appendChild("p", { innerText: "`P_5=Q_6`" });
+        draw.foreignObject(80, 40).move(80, 5).appendChild("p", { innerText: "`P_6=Q_7`" });
+        draw.foreignObject(80, 40).move(120, 65).appendChild("p", { innerText: "`P_7=Q_8`" });
+
+        var sstring = "M", C;
+
+        for (var i = 0; i < 8; i++) {
+            draw.circle(6).move(P[i].x - 3, P[i].y - 3).fill('none').stroke(stroke1);
+            sstring = sstring.concat(P[i].x, " ", P[i].y, " ");
+        }
+
+        draw.circle(4).move(243 - 2, 190 - 2).stroke(stroke1);//Q3
+        draw.line(243, 190 , 307, 160).stroke(stroke1);
+        draw.circle(4).move(307 - 2, 160 - 2).stroke(stroke1);//Q4
+
+        draw.path(sstring).fill("none").stroke(stroke3);
+        draw.path(NURBSUtils.DrawPath(3, U, P, 0, 5)).fill("none").stroke(stroke3);
+
+        //
+        draw.line(100, 240, 330, 240).stroke(stroke1);
+
+        draw.line(100, 235, 100, 245).stroke(stroke1);
+        draw.line(105, 235, 105, 245).stroke(stroke1);
+        draw.line(110, 235, 110, 245).stroke(stroke1);
+        draw.line(115, 235, 115, 245).stroke(stroke1);
+
+        draw.line(155, 235, 155, 245).stroke(stroke1);
+        draw.line(195, 235, 195, 245).stroke(stroke1);
+        draw.line(235, 235, 235, 245).stroke(stroke1);
+        draw.line(275, 235, 275, 245).stroke(stroke1);
+
+        draw.line(315, 235, 315, 245).stroke(stroke1);
+        draw.line(320, 235, 320, 245).stroke(stroke1);
+        draw.line(325, 235, 325, 245).stroke(stroke1);        
+        draw.line(330, 235, 330, 245).stroke(stroke1);
+
+        draw.path("M115 255 115 260 235 260 235 255").fill("none").stroke(stroke3);
+        draw.path("M155 270 155 275 275 275 275 270").fill("none").stroke(stroke3);
+        draw.path("M195 285 195 290 315 290 315 285").fill("none").stroke(stroke3);
+        draw.circle(6).move(195 - 3, 260 - 3).fill('none').stroke(stroke1);
+        draw.circle(6).move(195 - 3, 275 - 3).fill('none').stroke(stroke1);
+        draw.circle(6).move(195 - 3, 290 - 3).fill('none').stroke(stroke1);
+        draw.path("M195 220 195 227 192 227 195 240 198 227 195 227").fill("none").stroke(stroke3);
+        draw.foreignObject(80, 40).move(190, 185).appendChild("p", { innerText: "`bar u`" });
+    </script>
+
+</body>
+
+</html>

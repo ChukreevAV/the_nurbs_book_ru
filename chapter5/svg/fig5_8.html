@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig5_8</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.138.3/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>
+
+        var draw = SVG(document.getElementById('drawing')).size(400, 200);
+        var stroke1 = { width: 1 }, stroke2 = { color: "black", dasharray: "5,5" }, stroke3 = { color: "black" };
+
+        draw.path("M20,120 70,50 220,50 270,120").fill("none").stroke(stroke3);
+        draw.circle(6).move(70 - 3, 50 - 3).fill('none').stroke(stroke1);        
+        draw.circle(6).move(160 - 3, 50 - 3).fill('none').stroke(stroke1);    
+        draw.circle(6).move(220 - 3, 50 - 3).fill('none').stroke(stroke1);    
+        draw.line(107.5, 45, 107.5, 55).stroke(stroke1);
+        draw.line(182.5, 45, 182.5, 55).stroke(stroke1);
+        draw.foreignObject(80, 40).move(60, 10).appendChild("p", { innerText: "`P_{i-1}`" });
+        draw.foreignObject(80, 40).move(150, 10).appendChild("p", { innerText: "`Q`" });
+        draw.foreignObject(80, 40).move(210, 10).appendChild("p", { innerText: "`P_i`" });    
+        
+        draw.foreignObject(80, 40).move(70, 40).appendChild("p", { innerText: "`u_i`" });
+
+        draw.foreignObject(80, 40).move(95, 40).appendChild("p", { innerText: "`u_{i+1}`" });
+        draw.foreignObject(80, 40).move(165, 40).appendChild("p", { innerText: "`u_{i+2}`" });
+        draw.foreignObject(80, 40).move(240, 40).appendChild("p", { innerText: "`u_{i+3}`" });        
+
+    </script>
+
+</body>
+
+</html>

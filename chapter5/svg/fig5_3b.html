@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fig5_3a</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=AM_SVG"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/lib/svg/svg.foreignobject.js"></script>
+</head>
+
+<body>
+    <svg id="drawing"></svg>
+
+    <script>        
+        var draw = SVG(document.getElementById('drawing')).size(500, 340);
+        var stroke1 = { width: 1 }, stroke2 = { color: "black", dasharray: "5,5" }, stroke3 = { color: "black" }, stroke4 = { color: "red" };      
+        var markerArrow = draw.marker(17, 7, function (add) { add.path("M1,6 L16,3.5 L1,1 L1,6").fill("white").stroke(stroke3); }).ref(16, 3.5);  
+
+        draw.line(50, 170, 350, 80).stroke(stroke1);
+        draw.circle(4).move(50 - 2, 170 - 2).fill('none').stroke(stroke1); //P2
+        draw.circle(4).move(350 - 2, 80 - 2).fill('none').stroke(stroke1); //P3
+        draw.foreignObject(80, 40).move(25, 150).appendChild("p", { innerText: "`P_2`" });
+        draw.foreignObject(80, 40).move(355, 55).appendChild("p", { innerText: "`P_3`" });
+
+        draw.circle(4).move(150 - 2, 140 - 2).fill('none').stroke(stroke1);
+        draw.circle(4).move(250 - 2, 110 - 2).fill('none').stroke(stroke1);
+        //draw.line(60, 200, 360, 110).stroke(stroke1).marker("end", markerArrow);
+        draw.line(220, 152, 360, 110).stroke(stroke1).marker("end", markerArrow);
+        draw.line(200, 158, 60, 200).stroke(stroke1).marker("end", markerArrow);
+        draw.foreignObject(80, 40).move(204, 128).appendChild("p", { innerText: "`d_3`" });
+        draw.line(58.5, 195, 61.5, 205).stroke(stroke3);
+        draw.line(358.5, 105, 361.5, 115).stroke(stroke3);
+        //
+        draw.line(280, 68, 240, 80).stroke(stroke3).marker("end", markerArrow);
+        draw.foreignObject(80, 40).move(263, 20).appendChild("p", { innerText: "`L_3^2`" });
+        draw.foreignObject(80, 40).move(283, 40).appendChild("p", { innerText: "`d_3^2`" });
+        draw.line(300, 62, 340, 50).stroke(stroke3).marker("end", markerArrow);
+        draw.line(338.5, 45, 341.5, 55).stroke(stroke3);
+        draw.line(138.5, 105, 141.5, 115).stroke(stroke3);
+        draw.line(180, 98, 140, 110).stroke(stroke3);
+        draw.foreignObject(80, 40).move(162, 47).appendChild("p", { innerText: "`L_3^1`" });
+        draw.foreignObject(80, 40).move(182, 67).appendChild("p", { innerText: "`d_3^1`" });
+        //draw.line(140, 110, 240, 80).stroke(stroke4); //
+        draw.line(200, 92, 240, 80).stroke(stroke3);
+        draw.line(238.5, 75, 241.5, 85).stroke(stroke3);
+        draw.line(100, 122, 140, 110).stroke(stroke3).marker("end", markerArrow);
+        draw.foreignObject(80, 40).move(65, 75).appendChild("p", { innerText: "`L_3^0`" });
+        draw.foreignObject(80, 40).move(85, 95).appendChild("p", { innerText: "`d_3^0`" });
+        draw.line(80, 128, 40, 140).stroke(stroke3).marker("end", markerArrow);
+        draw.line(38.5, 135, 41.5, 145).stroke(stroke3);
+        //
+        draw.foreignObject(80, 40).move(45, 200).appendChild("p", { innerText: "`u_3`" });
+        draw.line(50, 250, 350, 250).stroke(stroke1);
+        draw.line(160, 290, 50, 290).stroke(stroke1).marker("end", markerArrow);
+        draw.line(240, 290, 350, 290).stroke(stroke1).marker("end", markerArrow);
+        draw.foreignObject(80, 40).move(170, 265).appendChild("p", { innerText: "`u_6 - u_3`" });
+        draw.line(50, 245, 50, 255).stroke(stroke1);
+        draw.foreignObject(80, 40).move(145, 200).appendChild("p", { innerText: "`u_4`" });
+        draw.foreignObject(80, 40).move(85, 245).appendChild("p", { innerText: "`λ_3^0`" });
+        draw.line(150, 245, 150, 255).stroke(stroke1);
+        draw.foreignObject(80, 40).move(245, 200).appendChild("p", { innerText: "`u_5`" });
+        draw.foreignObject(80, 40).move(185, 245).appendChild("p", { innerText: "`λ_3^1`" });
+        draw.line(250, 245, 250, 255).stroke(stroke1);        
+        draw.foreignObject(80, 40).move(345, 200).appendChild("p", { innerText: "`u_6`" });
+        draw.foreignObject(80, 40).move(285, 245).appendChild("p", { innerText: "`λ_3^2`" });
+        draw.line(350, 245, 350, 255).stroke(stroke1);        
+
+    </script>
+
+</body>
+
+</html>
