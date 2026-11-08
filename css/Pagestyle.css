@@ -1,5 +1,6 @@
 body {
     width: 600px;
+    padding-bottom: 8px;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
@@ -87,23 +88,8 @@ td {
     vertical-align: top;
 }
 
-#footer {
-    position: relative;
-    /* Фиксированное положение */
-    left: 0;
-    bottom: 0;
-    /* Левый нижний угол */
-    padding: 1px;
-    /* Поля вокруг текста */
-    text-align: center;
-    background: white;
-    /* Цвет фона */
-    width: 100%;
-    /* Ширина слоя */
-}
-
 footer {
-    position: relative;
+    position: fixed;
     /* Фиксированное положение */
     left: 0;
     bottom: 0;
@@ -113,6 +99,6 @@ footer {
     text-align: center;
     background: white;
     /* Цвет фона */
-    width: 100%;
+    width: 600px;
     /* Ширина слоя */
 }

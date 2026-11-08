@@ -140,11 +140,6 @@ AFRAME.registerComponent('surflines', {
             this.addLine(su, eu, P, false, u, group, mm)
         }
 
-        /*         var p = this.data.p, q = this.data.q;
-                var U = this.data.U, V = this.data.V;
-                var target = new THREE.Vector3(0, 0, 0);
-                NURBSUtils.calcSurfacePoint(p, q, U, V, P, 0.6, 0.6, target); */
-
         this.el.setObject3D(this.attrName, group);
 
     }

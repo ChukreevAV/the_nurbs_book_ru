@@ -57,7 +57,7 @@ AFRAME.registerComponent('surfnet', {
     },
 
     init: function () {
-        var geometry, vertices, group = new THREE.Group();
+        var group = new THREE.Group();
         var dlmaterial = new THREE.LineDashedMaterial({
             color: "#000000",
             opacity: 1,
