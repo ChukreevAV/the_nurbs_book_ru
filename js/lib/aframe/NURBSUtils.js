@@ -601,7 +601,13 @@ NURBSUtils = {
 
 			temp[l] = new THREE.Vector4(0, 0, 0, 0);
 			for (var k = 0; k <= p; ++k) {
-				var point = P[uspan - p + k][vspan - q + l].clone();
+				var p1 = P[uspan - p + k][vspan - q + l]
+
+				if (p1 === undefined) {
+    				return "Undefined value!";
+  				}
+
+				var point = p1.clone();
 				var w = point.w;
 				point.x *= w;
 				point.y *= w;

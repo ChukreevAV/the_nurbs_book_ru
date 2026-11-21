@@ -37,9 +37,7 @@ AFRAME.registerComponent('surfnet', {
             i = 0;
 
             for (var x = 0; x < xend; x++) {
-                if (inv) {
-                    x1 = y; y1 = x;
-                }
+                if (inv) { x1 = y; y1 = x; }
                 else { x1 = x; y1 = y; }
 
                 vertices[i * 3] = P[x1][y1].x;
@@ -119,7 +117,6 @@ AFRAME.registerComponent('surfnet', {
                 psGeometry.vertices.push(new THREE.Vector3(P[x][y].x, P[x][y].y, P[x][y].z));
             }
         }
-
 
         this.subfunc(this.data.ny, this.data.nx, true, P, dlmaterial, group);
         this.subfunc(this.data.nx, this.data.ny, false, P, dlmaterial, group);

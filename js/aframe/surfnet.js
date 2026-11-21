@@ -2,7 +2,12 @@ AFRAME.registerComponent('surfnet', {
     schema: {
         controlPoints: {
             type: 'array',
-            default: [0, 0, 0, 1, 1, 1, 0, 1, 3, 1, 0, 1, 4, 0, 0, 1]
+            default: [
+                0, 0, 0, 1, //x, y, z, w
+                1, 1, 0, 1, 
+                3, 1, 0, 1,
+                4, 0, 0, 1
+            ]
         },
         U: {
             type: 'array',
@@ -37,9 +42,7 @@ AFRAME.registerComponent('surfnet', {
             i = 0;
 
             for (var x = 0; x < xend; x++) {
-                if (inv) {
-                    x1 = y; y1 = x;
-                }
+                if (inv) { x1 = y; y1 = x; }
                 else { x1 = x; y1 = y; }
 
                 vertices[i * 3] = P[x1][y1].x;

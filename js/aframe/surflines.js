@@ -42,20 +42,53 @@ AFRAME.registerComponent('surflines', {
         }
     },
 
+    subLineU: function (p, q, U, V, P, u, vstep) {
+        var target = new THREE.Vector3(0, 0, 0);
+        var vertices = new Float32Array((vstep + 1) * 3);
+        var k = 0;
+        for (var j = 0; j <= vstep; j++) {
+            var v = j / vstep;
+            NURBSUtils.calcSurfacePoint(p, q, U, V, P, u, v, target);
+            vertices[k * 3] = target.x;
+            vertices[k * 3 + 1] = target.y;
+            vertices[k * 3 + 2] = target.z;
+            k++;
+        }
+        return vertices;
+    },
+
+    subLineV: function (p, q, U, V, P, v, vstep) {
+        var target = new THREE.Vector3(0, 0, 0);
+        var vertices = new Float32Array((vstep + 1) * 3);
+        var k = 0;
+        for (var j = 0; j <= vstep; j++) {
+            var u = j / vstep;
+            NURBSUtils.calcSurfacePoint(p, q, U, V, P, u, v, target);
+            vertices[k * 3] = target.x;
+            vertices[k * 3 + 1] = target.y;
+            vertices[k * 3 + 2] = target.z;
+            k++;
+        }
+        return vertices;
+    },
+
+    makeMesh: function (vertices, material) {
+        var geometry = new THREE.BufferGeometry();
+        geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
+        return new THREE.Line(geometry, material);
+    },
+
     init: function () {
-        var vertices, geometry, group = new THREE.Group();
+        var vertices, group = new THREE.Group();
         var P = [], k = 0;
+        var cp = this.data.controlPoints;
 
         this.rendererSystem = this.el.sceneEl.systems.renderer;
 
         for (var x = 0; x < this.data.nx; x++) {
             P.push([]);
             for (var y = 0; y < this.data.ny; y++) {
-                P[x].push(new THREE.Vector4(
-                    this.data.controlPoints[k],
-                    this.data.controlPoints[k + 1],
-                    this.data.controlPoints[k + 2],
-                    this.data.controlPoints[k + 3]));
+                P[x].push(new THREE.Vector4(cp[k], cp[k + 1], cp[k + 2], cp[k + 3]));
                 k += 4;
             }
         }
@@ -67,50 +100,23 @@ AFRAME.registerComponent('surflines', {
             visible: true
         });
 
-        var ustep = this.data.ustep, vstep = 100, u, v;
+        var ustep = this.data.ustep, u, v;
         var p = this.data.p, q = this.data.q;
         var U = this.data.U, V = this.data.V;
-        var target = new THREE.Vector3(0, 0, 0);
 
         if (this.data.draw_u) {
             for (var i = 0; i <= ustep; i++) {
                 u = i / ustep;
-                vertices = new Float32Array((vstep + 1) * 3);
-                k = 0;
-                for (var j = 0; j <= vstep; j++) {
-                    v = j / vstep;
-                    NURBSUtils.calcSurfacePoint(p, q, U, V, P, u, v, target);
-                    vertices[k * 3] = target.x;
-                    vertices[k * 3 + 1] = target.y;
-                    vertices[k * 3 + 2] = target.z;
-                    k++;
-                }
-
-                geometry = new THREE.BufferGeometry();
-                geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
-                mesh = new THREE.Line(geometry, material);
-                group.add(mesh);
+                vertices = this.subLineU(p, q, U, V, P, u, ustep);
+                group.add(this.makeMesh(vertices, material));
             }
         }
 
         if (this.data.draw_v) {
             for (var i = 0; i <= ustep; i++) {
                 v = i / ustep;
-                vertices = new Float32Array((vstep + 1) * 3);
-                k = 0;
-                for (var j = 0; j <= vstep; j++) {
-                    u = j / vstep;
-                    NURBSUtils.calcSurfacePoint(p, q, U, V, P, u, v, target);
-                    vertices[k * 3] = target.x;
-                    vertices[k * 3 + 1] = target.y;
-                    vertices[k * 3 + 2] = target.z;
-                    k++;
-                }
-
-                geometry = new THREE.BufferGeometry();
-                geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
-                mesh = new THREE.Line(geometry, material);
-                group.add(mesh);
+                vertices = this.subLineV(p, q, U, V, P, v, ustep);
+                group.add(this.makeMesh(vertices, material));
             }
         }
 

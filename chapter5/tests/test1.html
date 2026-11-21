@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Шаблон</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.138.3/three.js"></script>
+    <script src="../../js/lib/aframe/NURBSUtils.js"></script>
+    <script src="../../js/lib/svg/svg.min.js"></script>
+    <script src="../../js/aframe/InsKnots.js"></script>
+
+</head>
+
+<body>
+
+    <svg id="drawing"></svg>
+
+    <script>
+        var U = [0, 0, 0, 0, 1, 2, 3, 4, 5, 5, 5, 5];
+        var P = [
+            new THREE.Vector2(20, 150),
+            new THREE.Vector2(90, 120),
+            new THREE.Vector2(150, 190),
+            new THREE.Vector2(290, 190),
+            new THREE.Vector2(340, 100),
+            new THREE.Vector2(290, 30),
+            new THREE.Vector2(150, 30),
+            new THREE.Vector2(110, 90)
+        ];
+
+        var draw = SVG(document.getElementById('drawing')).size(400, 340);
+        var stroke1 = { width: 1 }, stroke2 = { color: "red" }, stroke3 = { color: "black" };
+
+        var sstring = "M", C;
+
+        for (var i = 0; i < P.length; i++) {
+            draw.circle(6).move(P[i].x - 3, P[i].y - 3).fill('none').stroke(stroke1);
+            sstring = sstring.concat(P[i].x, " ", P[i].y, " ");
+        }
+
+        draw.path(sstring).fill("none").stroke(stroke3);
+        draw.path(NURBSUtils.DrawPath(3, U, P, 0, 5)).fill("none").stroke(stroke3);
+
+        var U1 = []
+        var P1 = []
+        var nq = 0
+        InsKnots.CurveKnotlns(7, 3, U, P, 5/2, 5, 0, 1, nq, U1, P1)
+        var sstring = "M", C;
+        for (var i = 0; i < P1.length; i++) {
+            draw.circle(6).move(P1[i].x - 3, P1[i].y - 3).fill('none').stroke(stroke2);
+            sstring = sstring.concat(P1[i].x, " ", P1[i].y, " ");
+        }
+
+        draw.path(sstring).fill("none").stroke(stroke2);
+    </script>
+
+</body>
+
+</html>
