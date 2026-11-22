@@ -28,7 +28,12 @@ AFRAME.registerComponent('nurbscurve', {
         var P = [], k = 0;
 
         for (var i = 0; i < this.data.controlPoints.length / 4; i++) {
-            P.push(new THREE.Vector4(this.data.controlPoints[k], this.data.controlPoints[k + 1], this.data.controlPoints[k + 2], this.data.controlPoints[k + 3]));
+            P.push(new THREE.Vector4(
+                this.data.controlPoints[k],
+                this.data.controlPoints[k + 1],
+                this.data.controlPoints[k + 2],
+                this.data.controlPoints[k + 3]
+            ));
             k += 4;
         }
 

@@ -281,7 +281,7 @@ surfaces = {
         var surf = surfaces.SurfaceKnotIns(surface, params);
 
         var ks = params.k - params.s;
-        //var kp = ncurve.points[ks];
+
         var ps = surf.points;
         var lp = [];
         var rp = [];

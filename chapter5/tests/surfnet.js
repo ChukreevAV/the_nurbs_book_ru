@@ -130,9 +130,7 @@ AFRAME.registerComponent('surfnet', {
         });
 
         var psMaterial = new THREE.PointsMaterial({ color: this.data.color, size: this.data.size });
-        var ps1Material = new THREE.PointsMaterial({ color: 0xFF0000, size: 0.03 });
         var psGeometry = new THREE.Geometry();
-        var ps1Geometry = new THREE.Geometry();
         var P = [], k = 0;
 
         this.rendererSystem = this.el.sceneEl.systems.renderer;
